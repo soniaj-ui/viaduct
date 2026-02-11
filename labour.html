@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Labour Services - Via<span>duct</span></title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+
     <style>
         * {
             margin: 0;
@@ -94,32 +96,24 @@
         .logo {
             font-family: 'Poppins', sans-serif;
             font-size: clamp(1.5rem, 4vw, 2rem);
-            font-weight: 900;
+            font-weight: 800;
             color: var(--secondary);
             position: relative;
-            letter-spacing: -0.5px;
-            transition: all 0.3s ease;
-        }
-
-        .logo:hover {
-            transform: translateY(-2px);
         }
 
         .logo span {
             color: var(--primary);
-            position: relative;
         }
 
-        .logo span::after {
+        .logo::after {
             content: '';
             position: absolute;
-            bottom: -2px;
+            bottom: -5px;
             left: 0;
-            width: 100%;
-            height: 2px;
-            background: var(--accent);
-            border-radius: 1px;
-            opacity: 0.7;
+            width: 40px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 2px;
         }
 
         .mobile-menu-btn {
@@ -190,30 +184,6 @@
             position: relative;
         }
 
-        .nav-links a.active::before {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 6px;
-            height: 6px;
-            background: var(--primary);
-            border-radius: 50%;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% {
-                opacity: 1;
-                transform: translateX(-50%) scale(1);
-            }
-            50% {
-                opacity: 0.5;
-                transform: translateX(-50%) scale(1.2);
-            }
-        }
-
         /* Mobile Navigation - Enhanced */
         .mobile-nav {
             display: none;
@@ -239,7 +209,6 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 2rem;
-            
         }
 
         .mobile-nav-close {
@@ -285,8 +254,6 @@
         .mobile-nav-links a.active {
             color: var(--primary);
         }
-
-        
 
         .overlay {
             display: none;
@@ -364,12 +331,6 @@
             animation: fadeInUp 0.8s ease-out 0.6s backwards;
         }
 
-        .stat-item {
-            text-align: center;
-            flex: 1;
-            min-width: 120px;
-        }
-
         .stat-number {
             font-size: clamp(1.5rem, 3vw, 2rem);
             font-weight: 800;
@@ -383,7 +344,6 @@
             font-size: clamp(0.8rem, 1.5vw, 0.9rem);
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 1px;
         }
 
         .hero-decoration {
@@ -460,7 +420,7 @@
             margin: 0 auto;
         }
 
-        /* Labour Services Grid - Responsive */
+        /* Labour Services Grid - Updated Image Styling */
         .labour-services-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(min(350px, 100%), 1fr));
@@ -502,27 +462,59 @@
             transform: scaleX(1);
         }
 
+        /* Updated Labour Service Image Styling */
         .labour-service-icon {
-            height: clamp(120px, 20vw, 150px);
+            height: 250px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: clamp(2.5rem, 5vw, 3.5rem);
-            color: var(--white);
             position: relative;
             overflow: hidden;
+           
         }
 
+        .labour-service-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            display: block;
+            opacity: 0.9;
+        }
+
+        .labour-service-card:hover .labour-service-img {
+            transform: scale(1.1);
+            opacity: 1;
+        }
+
+        /* Different overlay colors for each card */
         .labour-service-card:nth-child(1) .labour-service-icon {
-            background: linear-gradient(135deg, var(--primary) 0%, #3a0ca3 100%);
+            background: linear-gradient(135deg, #2563EB, #1E40AF);
         }
 
         .labour-service-card:nth-child(2) .labour-service-icon {
-            background: linear-gradient(135deg, #06d6a0 0%, #0cb7a0 100%);
+            background: linear-gradient(135deg, #059669, #065F46);
         }
 
         .labour-service-card:nth-child(3) .labour-service-icon {
-            background: linear-gradient(135deg, var(--accent) 0%, #ff5400 100%);
+            background: linear-gradient(135deg, #8B5CF6, #6D28D9);
+        }
+
+        /* Add overlay pattern */
+        .labour-service-icon::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.4));
+            pointer-events: none;
+            transition: all 0.3s ease;
+        }
+
+        .labour-service-card:hover .labour-service-icon::after {
+            background: linear-gradient(to bottom, rgba(37,99,235,0.2), rgba(37,99,235,0.6));
         }
 
         .labour-service-content {
@@ -879,6 +871,31 @@
             font-size: 0.875rem;
         }
 
+        /* Responsive Image Adjustments */
+        @media (max-width: 1024px) {
+            .labour-service-icon {
+                height: 220px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .labour-service-icon {
+                height: 200px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .labour-service-icon {
+                height: 180px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .labour-service-icon {
+                height: 160px;
+            }
+        }
+
         /* Touch device optimizations */
         @media (hover: none) and (pointer: coarse) {
             .nav-links a:hover,
@@ -899,6 +916,10 @@
             
             .labour-service-card:hover::before {
                 transform: scaleX(0);
+            }
+            
+            .labour-service-card:hover .labour-service-img {
+                transform: none;
             }
         }
 
@@ -1017,6 +1038,7 @@
             
             .labour-stats {
                 gap: 1.5rem;
+                justify-content: center;
             }
             
             .stat-item {
@@ -1111,6 +1133,10 @@
                 width: 260px;
                 padding: 1.25rem;
             }
+            
+            .labour-service-icon {
+                height: 140px;
+            }
         }
     </style>
 </head>
@@ -1181,7 +1207,7 @@
         </div>
     </section>
 
-    <!-- Services Section -->
+    <!-- Services Section - Updated with Images -->
     <section class="section">
         <div class="container">
             <div class="section-header">
@@ -1191,9 +1217,11 @@
             </div>
 
             <div class="labour-services-grid">
-                <!-- Household Labour Card -->
+                <!-- Household Labour Card - Updated with Image -->
                 <div class="labour-service-card">
-                    <div class="labour-service-icon">🏠</div>
+                    <div class="labour-service-icon">
+                        <img src="assets/res.jpg" alt="Household Labour Services" class="labour-service-img">
+                    </div>
                     <div class="labour-service-content">
                         <h3 class="labour-service-title">Household Labour</h3>
                         <p class="labour-service-desc">Trusted help for your home and family needs with verified professionals.</p>
@@ -1209,9 +1237,11 @@
                     </div>
                 </div>
 
-                <!-- Industrial Labour Card -->
+                <!-- Industrial Labour Card - Updated with Image -->
                 <div class="labour-service-card">
-                    <div class="labour-service-icon">🏭</div>
+                    <div class="labour-service-icon">
+                        <img src="assets/industrial.jpg" alt="Industrial Labour Services" class="labour-service-img">
+                    </div>
                     <div class="labour-service-content">
                         <h3 class="labour-service-title">Industrial Labour</h3>
                         <p class="labour-service-desc">Skilled workforce for commercial and industrial projects of any scale.</p>
@@ -1227,9 +1257,11 @@
                     </div>
                 </div>
 
-                <!-- Specialized Services Card -->
+                <!-- Specialized Services Card - Updated with Image -->
                 <div class="labour-service-card">
-                    <div class="labour-service-icon">🔧</div>
+                    <div class="labour-service-icon">
+                        <img src="assets/specialised.jpg" alt="Specialized Labour Services" class="labour-service-img">
+                    </div>
                     <div class="labour-service-content">
                         <h3 class="labour-service-title">Specialized Services</h3>
                         <p class="labour-service-desc">Expert professionals for specialized tasks and project-based requirements.</p>
@@ -1353,9 +1385,9 @@
                     <h3>Via<span>duct</span></h3>
                     <p>Your trusted partner in construction, design, and home automation. Building dreams with precision and care.</p>
                     <div class="social-links">
-                        <a href="#" class="social-link" aria-label="WhatsApp">📱</a>
-                        <a href="#" class="social-link" aria-label="Facebook">📘</a>
-                        <a href="#" class="social-link" aria-label="Instagram">📷</a>
+                        <a href="#" class="social-link" aria-label="Whatsapp"><i class="ri-whatsapp-line"></i></a>
+                        <a href="#" class="social-link" aria-label="Instagram"><i class="ri-instagram-line"></i></a>
+                        <a href="#" class="social-link" aria-label="Facebook"><i class="ri-facebook-line"></i></a>
                     </div>
                 </div>
                 
@@ -1382,7 +1414,8 @@
                 <div class="footer-column">
                     <h4>Contact</h4>
                     <ul class="footer-links">
-                        <li><a href="tel:+15551234567">+1 (555) 123-4567</a></li>
+                        <li><a href="tel:+918825658811">Mobile: 8825658811</a></li>
+                        <li><a href="tel:+919385619847">Mobile: 9385619847</a></li>
                         <li><a href="mailto:info@viaduct.com">info@viaduct.com</a></li>
                         <li>123 Innovation Drive</li>
                         <li>Tech City, TC 10101</li>
@@ -1474,19 +1507,45 @@
             const speed = 200;
             
             counters.forEach(counter => {
-                const target = parseInt(counter.textContent.replace('+', ''));
-                const increment = target / speed;
-                let current = 0;
+                const originalText = counter.textContent;
                 
-                const updateCounter = () => {
-                    if (current < target) {
-                        current += increment;
-                        counter.textContent = Math.ceil(current) + '+';
-                        setTimeout(updateCounter, 1);
-                    }
-                };
-                
-                updateCounter();
+                if (originalText.includes('+')) {
+                    const target = parseInt(originalText.replace('+', ''));
+                    const increment = target / speed;
+                    let current = 0;
+                    
+                    const updateCounter = () => {
+                        if (current < target) {
+                            current += increment;
+                            counter.textContent = Math.ceil(current) + '+';
+                            setTimeout(updateCounter, 1);
+                        } else {
+                            counter.textContent = target + '+';
+                        }
+                    };
+                    
+                    updateCounter();
+                }
+                else if (originalText.includes('/')) {
+                    counter.textContent = originalText;
+                }
+                else if (originalText.includes('%')) {
+                    const target = parseInt(originalText.replace('%', ''));
+                    const increment = target / speed;
+                    let current = 0;
+                    
+                    const updateCounter = () => {
+                        if (current < target) {
+                            current += increment;
+                            counter.textContent = Math.ceil(current) + '%';
+                            setTimeout(updateCounter, 1);
+                        } else {
+                            counter.textContent = target + '%';
+                        }
+                    };
+                    
+                    updateCounter();
+                }
             });
         }
 

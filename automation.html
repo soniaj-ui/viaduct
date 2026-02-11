@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Automation Solutions | BuildTech</title>
+    <title>Home Automation Solutions | Viaduct</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+      <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
     <style>
         :root {
     --primary: #2563EB;
@@ -692,81 +693,126 @@ a {
 
 /* Footer */
 .footer {
-    background: var(--secondary);
-    color: var(--gray-300);
-    padding: 4rem 0 2rem;
-}
+            background: var(--secondary);
+            color: var(--white);
+            padding: clamp(4rem, 8vw, 6rem) 0 3rem;
+            position: relative;
+            overflow: hidden;
+        }
 
-.footer-grid {
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1fr;
-    gap: 3rem;
-    margin-bottom: 3rem;
-}
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+        }
 
-.footer-brand h3 {
-    font-size: 1.5rem;
-    color: var(--white);
-    margin-bottom: 1rem;
-}
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: clamp(2rem, 4vw, 4rem);
+            margin-bottom: 4rem;
+            position: relative;
+            z-index: 1;
+        }
 
-.footer-brand p {
-    margin-bottom: 1.5rem;
-    line-height: 1.7;
-}
+        .footer-brand h3 {
+            font-size: clamp(1.5rem, 3vw, 1.8rem);
+            margin-bottom: 1rem;
+            color: var(--white);
+            font-weight: 900;
+        }
 
-.social-links {
-    display: flex;
-    gap: 1rem;
-}
+        .footer-brand h3 span {
+            color: var(--primary);
+        }
 
-.social-link {
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 8px;
-    font-size: 1.25rem;
-    transition: all 0.3s ease;
-}
+        .footer-brand p {
+            color: var(--gray-400);
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+            font-size: clamp(0.9rem, 1.5vw, 1rem);
+        }
 
-.social-link:hover {
-    background: var(--primary);
-    transform: translateY(-3px);
-}
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
 
-.footer-column h4 {
-    font-size: 1rem;
-    color: var(--white);
-    margin-bottom: 1.25rem;
-}
+        .social-link {
+            width: clamp(40px, 6vw, 45px);
+            height: clamp(40px, 6vw, 45px);
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            min-width: 44px;
+            min-height: 44px;
+            text-decoration: none;
+            color: var(--white);
+        }
 
-.footer-links {
-    list-style: none;
-}
+        .social-link:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
 
-.footer-links li {
-    margin-bottom: 0.75rem;
-}
+        .footer-column h4 {
+            font-size: clamp(1rem, 2vw, 1.1rem);
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--white);
+            font-weight: 700;
+            position: relative;
+            padding-bottom: 0.75rem;
+        }
 
-.footer-links a {
-    color: var(--gray-400);
-    transition: color 0.2s;
-}
+        .footer-column h4::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
 
-.footer-links a:hover {
-    color: var(--white);
-}
+        .footer-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
 
-.footer-bottom {
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    padding-top: 2rem;
-    text-align: center;
-    color: var(--gray-400);
-}
+        .footer-links a {
+            color: var(--gray-400);
+            transition: all 0.2s ease;
+            display: inline-block;
+            min-height: 24px;
+            text-decoration: none;
+            font-size: clamp(0.9rem, 1.5vw, 1rem);
+        }
 
+        .footer-links a:hover {
+            color: var(--white);
+            padding-left: 5px;
+        }
+
+        .footer-bottom {
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            color: var(--gray-400);
+            font-size: 0.875rem;
+        }
 /* Mobile Navigation - UPDATED */
 .overlay {
     display: none;
@@ -1678,18 +1724,19 @@ a {
     </section>
 
     <!-- Footer -->
-    <footer class="footer">
+        <footer class="footer">
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-brand">
-                    <h3>BuildTech</h3>
-                    <p>Creating intelligent spaces that enhance your lifestyle through technology and design</p>
+                    <h3>Via<span>duct</span></h3>
+                    <p>Your trusted partner in construction, design, and home automation. Building dreams with precision and care.</p>
                     <div class="social-links">
-                        <a href="#" class="social-link">📱</a>
-                        <a href="#" class="social-link">📘</a>
-                        <a href="#" class="social-link">📷</a>
+                   <a href="#" class="social-link" aria-label="Whatsapp"><i class="ri-whatsapp-line"></i></a>
+                        <a href="#" class="social-link" aria-label="Instagram"><i class="ri-instagram-line"></i></a>
+                        <a href="#" class="social-link" aria-label="Facebook"><i class="ri-facebook-line"></i></a>
                     </div>
                 </div>
+                
                 <div class="footer-column">
                     <h4>Services</h4>
                     <ul class="footer-links">
@@ -1699,30 +1746,35 @@ a {
                         <li><a href="automation.html">Home Automation</a></li>
                     </ul>
                 </div>
+                
                 <div class="footer-column">
                     <h4>Company</h4>
                     <ul class="footer-links">
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="projects.html">Projects</a></li>
-                        <li><a href="careers.html">Careers</a></li>
+                        <li><a href="index.html#about">About Us</a></li>
+                        <li><a href="#">Projects</a></li>
+                        <li><a href="#">Careers</a></li>
                         <li><a href="contact.html">Contact</a></li>
                     </ul>
                 </div>
+                
                 <div class="footer-column">
                     <h4>Contact</h4>
                     <ul class="footer-links">
-                        <li><a href="tel:+15551234567">+1 (555) 123-4567</a></li>
-                        <li><a href="mailto:info@buildtech.com">info@buildtech.com</a></li>
-                        <li>123 Innovation Drive</li>
-                        <li>Tech City, TC 10101</li>
+                        <li><a href="tel:+91 8825658811">Mobile:8825658811</a></li>
+                        <li><a href="tel:+91 9385619847">Mobile:9385619847</a></li>
+                        <li><a href="mailto:info@viaduct.com">info@viaduct.com</a></li>
+                        <li>86, pillaiyar Kovil Street, kalavali koot road, Ranipet</li>
+                        <li>Chennai-632506</li>
                     </ul>
                 </div>
             </div>
+            
             <div class="footer-bottom">
-                <p>&copy; 2026 BuildTech. All rights reserved.</p>
+                <p>&copy; 2026 Via<span>duct</span>. All rights reserved.</p>
             </div>
         </div>
     </footer>
+
 
     <script>
         // Mobile Navigation Toggle
