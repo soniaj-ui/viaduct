@@ -1,0 +1,1524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Construction Services - Via<span>duct</span></title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2563EB;
+            --primary-dark: #1D4ED8;
+            --secondary: #0F172A;
+            --accent: #8B5CF6;
+            --light: #F8FAFC;
+            --white: #FFFFFF;
+            --gray-100: #F1F5F9;
+            --gray-200: #E2E8F0;
+            --gray-300: #CBD5E1;
+            --gray-400: #94A3B8;
+            --gray-500: #64748B;
+            --gray-600: #475569;
+            --gray-700: #334155;
+            --gray-800: #1E293B;
+            --border: rgba(0, 0, 0, 0.05);
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.08);
+            --shadow-xl: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+            --vh: 1vh;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--gray-700);
+            background: var(--white);
+            overflow-x: hidden;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Header - matching index.html */
+        .header {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Poppins', sans-serif;
+            font-size: clamp(1.5rem, 4vw, 2rem);
+            font-weight: 800;
+            color: var(--secondary);
+            position: relative;
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        .logo::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 40px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--gray-700);
+            cursor: pointer;
+            padding: 0.5rem;
+            z-index: 1002;
+            min-width: 44px;
+            min-height: 44px;
+        }
+
+        /* Navigation - matching index.html */
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            font-weight: 600;
+            color: var(--gray-600);
+            position: relative;
+            font-size: 0.95rem;
+            padding: 0.5rem 0;
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: var(--primary);
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .nav-links a.active {
+            color: var(--primary);
+        }
+
+        /* Mobile Navigation - matching index.html */
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: 300px;
+            background: var(--white);
+            box-shadow: -5px 0 20px rgba(0, 0, 0, 0.1);
+            z-index: 1001;
+            padding: 2rem;
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .mobile-nav.active {
+            transform: translateX(0);
+        }
+
+        .mobile-nav-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .mobile-nav-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--gray-700);
+            cursor: pointer;
+            min-width: 44px;
+            min-height: 44px;
+        }
+
+        .mobile-nav-links {
+            list-style: none;
+        }
+
+        .mobile-nav-links li {
+            margin-bottom: 1rem;
+        }
+
+        .mobile-nav-links a {
+            display: block;
+            padding: 0.75rem 0;
+            font-weight: 600;
+            color: var(--gray-700);
+            border-bottom: 1px solid var(--border);
+            font-size: 1.1rem;
+            min-height: 44px;
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .mobile-nav-links a.active {
+            color: var(--primary);
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+        }
+
+        .overlay.active {
+            display: block;
+        }
+
+        /* Hero Section - matching index.html */
+        .hero {
+            padding-top: 12rem;
+            padding-bottom: 8rem;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #F0F9FF 0%, #FEF7FF 100%);
+            min-height: calc(var(--vh, 1vh) * 100);
+        }
+
+        .hero-content {
+            max-width: 800px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.2rem, 5vw, 4rem);
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 0.8s ease-out 0.2s backwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            color: var(--gray-600);
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+            animation: fadeInUp 0.8s ease-out 0.4s backwards;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.8s ease-out 0.6s backwards;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            min-height: 48px;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: var(--white);
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--secondary);
+            border: 2px solid var(--gray-300);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero-image {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 45%;
+            height: 80%;
+            border-radius: 30% 0 0 30%;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .hero-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .hero-decoration {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            opacity: 0.1;
+            mix-blend-mode: overlay;
+            border-radius: 30% 0 0 30%;
+        }
+
+        /* Carousel Section */
+        .carousel-section {
+            background: linear-gradient(135deg, #F8FAFC 0%, #FFFFFF 100%);
+            padding: 6rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .carousel-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: stretch;
+        }
+
+        /* Carousel Side */
+        .carousel-side {
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: var(--shadow-xl);
+            height: 100%;
+            min-height: 600px;
+        }
+
+        .carousel-slides {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .carousel-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .carousel-slide.active {
+            opacity: 1;
+            z-index: 1;
+        }
+
+        .carousel-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .slide-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%);
+            padding: 2rem;
+            color: white;
+        }
+
+        .slide-overlay h4 {
+            color: white;
+            font-size: clamp(1.2rem, 2vw, 1.5rem);
+            font-weight: 700;
+        }
+
+        /* Carousel Navigation */
+        .carousel-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.95);
+            color: var(--secondary);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.5rem;
+            font-weight: 700;
+            z-index: 10;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .carousel-nav:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .carousel-nav.prev {
+            left: 1rem;
+        }
+
+        .carousel-nav.next {
+            right: 1rem;
+        }
+
+        /* Carousel Controls */
+        .carousel-controls {
+            position: absolute;
+            bottom: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 0.75rem;
+            z-index: 10;
+        }
+
+        .carousel-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .carousel-dot:hover {
+            background: rgba(255, 255, 255, 0.8);
+            transform: scale(1.2);
+        }
+
+        .carousel-dot.active {
+            background: white;
+            width: 32px;
+            border-radius: 6px;
+        }
+
+        /* Text Side */
+        .text-side {
+            padding: 2rem 0;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            min-height: 600px;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4vw, 2.5rem);
+            font-weight: 800;
+            color: var(--secondary);
+            margin-bottom: 2rem;
+            letter-spacing: -0.5px;
+        }
+
+        .text-content {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            flex: 1;
+            justify-content: space-evenly;
+        }
+
+        .text-item {
+            display: flex;
+            gap: 1.5rem;
+            padding: 1.5rem;
+            border-radius: 16px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 2px solid transparent;
+            background: white;
+        }
+
+        .text-item:hover {
+            transform: translateX(8px);
+            background: var(--gray-100);
+        }
+
+        .text-item.active {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            color: white;
+            border-color: transparent;
+            box-shadow: var(--shadow-lg);
+            transform: translateX(8px);
+        }
+
+        .item-number {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            font-weight: 800;
+            color: var(--primary);
+            opacity: 0.3;
+            min-width: 60px;
+            transition: all 0.4s ease;
+        }
+
+        .text-item.active .item-number {
+            color: white;
+            opacity: 1;
+        }
+
+        .item-content h4 {
+            font-size: clamp(1.1rem, 2vw, 1.25rem);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--secondary);
+            transition: color 0.4s ease;
+        }
+
+        .text-item.active .item-content h4 {
+            color: white;
+        }
+
+        .item-content p {
+            color: var(--gray-600);
+            line-height: 1.6;
+            font-size: 0.95rem;
+            transition: color 0.4s ease;
+        }
+
+        .text-item.active .item-content p {
+            color: rgba(255, 255, 255, 0.95);
+        }
+
+        /* Content Section */
+        .content-section {
+            padding: 6rem 0;
+            background: white;
+        }
+
+        .section-intro {
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto 4rem;
+        }
+
+        .section-intro h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 800;
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.5px;
+        }
+
+        .section-intro p {
+            font-size: clamp(1rem, 2vw, 1.125rem);
+            color: var(--gray-600);
+            line-height: 1.8;
+        }
+
+        /* Construction Grid */
+        .construction-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Card Styles */
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem;
+            position: relative;
+            display: block;
+            text-decoration: none;
+            color: inherit;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid var(--gray-200);
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
+            border-color: var(--primary);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            transform: scaleX(0);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .go-corner {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            overflow: hidden;
+            top: 0;
+            right: 0;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            border-radius: 0 20px 0 100%;
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .card:hover .go-corner {
+            opacity: 1;
+            width: 80px;
+            height: 80px;
+        }
+
+        .go-arrow {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            transform: translate(-4px, -4px);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover .go-arrow {
+            transform: translate(0, 0);
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            display: block;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-title {
+            font-size: clamp(1.3rem, 2vw, 1.5rem);
+            font-weight: 700;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        .small-desc {
+            color: var(--gray-600);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-features {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .card-features li {
+            padding: 0.5rem 0;
+            color: var(--gray-600);
+            font-size: 0.9rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .card-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            padding: 5rem 2rem;
+            text-align: center;
+            color: white;
+        }
+
+        .cta-section h2 {
+            font-size: clamp(2rem, 4vw, 2.5rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .cta-section p {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1.25rem 3rem;
+            background: white;
+            color: var(--primary);
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Footer - matching index.html */
+        .footer {
+            background: var(--secondary);
+            color: var(--white);
+            padding: 6rem 0 3rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        .footer-brand h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--white);
+        }
+
+        .footer-brand p {
+            color: var(--gray-400);
+            margin-bottom: 1.5rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-link {
+            width: 45px;
+            height: 45px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            min-width: 44px;
+            min-height: 44px;
+            text-decoration: none;
+        }
+
+        .social-link:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .footer-column h4 {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--white);
+        }
+
+        .footer-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .footer-links a {
+            color: var(--gray-400);
+            transition: all 0.2s ease;
+            display: inline-block;
+            min-height: 24px;
+            text-decoration: none;
+        }
+
+        .footer-links a:hover {
+            color: var(--white);
+            padding-left: 5px;
+        }
+
+        .footer-bottom {
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            color: var(--gray-400);
+            font-size: 0.875rem;
+        }
+
+        /* Touch device optimizations */
+        @media (hover: none) and (pointer: coarse) {
+            .card:hover {
+                transform: none;
+                box-shadow: var(--shadow-lg);
+                border-color: var(--gray-200);
+            }
+            
+            .card:hover::before {
+                transform: scaleX(0);
+            }
+            
+            .card:hover .go-corner {
+                opacity: 0;
+            }
+            
+            .text-item:hover,
+            .text-item.active {
+                transform: none;
+            }
+            
+            .cta-button:hover {
+                transform: none;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            }
+            
+            .carousel-nav:hover {
+                transform: translateY(-50%);
+                background: rgba(255, 255, 255, 0.95);
+                color: var(--secondary);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .carousel-container {
+                gap: 3rem;
+            }
+
+            .carousel-side,
+            .text-side {
+                min-height: 550px;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .carousel-container {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .carousel-side,
+            .text-side {
+                min-height: 500px;
+            }
+            
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 3rem;
+            }
+            
+            .construction-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .content-section {
+                padding: 3rem 0;
+  
+            }
+            .carousel-section{
+                padding: 0rem;
+            }
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-nav {
+                display: block;
+            }
+
+            .hero {
+                padding-top: 10rem;
+                padding-bottom: 4rem;
+            }
+            
+            .hero-content {
+                order: 1;
+                width: 100%;
+                text-align: center;
+                margin-bottom: 3rem;
+            }
+            
+            .hero-image {
+                order: 2;
+                position: relative;
+                width: 100%;
+                height: 300px;
+                border-radius: 20px;
+                margin-top: 0;
+                transform: none;
+                top: 0;
+                right: 0;
+            }
+            
+            .hero-img {
+                border-radius: 20px;
+                height: 100%;
+            }
+            
+            .hero-cta {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .section-title {
+                font-size: 22px;
+            }
+
+            .section-intro h2 {
+                font-size: 2rem;
+            }
+
+            .construction-grid {
+                grid-template-columns: 1fr;
+                padding: 0 1rem;
+            }
+
+            .carousel-side,
+            .text-side {
+                min-height: 400px;
+            }
+
+            .carousel-nav {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+
+            .carousel-nav.prev {
+                left: 0.5rem;
+            }
+
+            .carousel-nav.next {
+                right: 0.5rem;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+            
+            .card {
+                padding: 2rem;
+            }
+            
+            .text-item {
+                padding: 1.25rem;
+            }
+            
+            .item-number {
+                min-width: 50px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                padding-top: 8rem;
+                padding-bottom: 3rem;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .hero-image {
+                height: 250px;
+            }
+
+            .section-intro h2 {
+                font-size: 22px;
+            }
+
+            .cta-section h2 {
+                font-size: 1.75rem;
+            }
+            
+            .carousel-side,
+            .text-side {
+                min-height: 350px;
+            }
+            
+            .carousel-dot {
+                width: 10px;
+                height: 10px;
+            }
+            
+            .carousel-dot.active {
+                width: 24px;
+            }
+            
+            .slide-overlay {
+                padding: 1.5rem;
+            }
+            
+            .card {
+                padding: 1.5rem;
+            }
+            
+            .card-icon {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .hero p {
+                font-size: 0.95rem;
+            }
+            
+            .btn {
+                padding: 0.875rem 1.5rem;
+                font-size: 0.95rem;
+            }
+            
+            .text-item {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
+            }
+            
+            .item-number {
+                min-width: auto;
+                text-align: center;
+            }
+            
+            .card {
+                padding: 1.25rem;
+            }
+            
+            .mobile-nav {
+                width: 280px;
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container header-content">
+            <a href="index.html" class="logo">Via<span>duct</span></a>
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open menu">☰</button>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="construction.html" class="active">Construction</a></li>
+                <li><a href="architecture.html">Architecture</a></li>
+                <li><a href="labour.html">Labour</a></li>
+                <li><a href="automation.html">Automation</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Mobile Navigation -->
+    <div class="overlay" id="overlay"></div>
+    <div class="mobile-nav" id="mobileNav">
+        <div class="mobile-nav-header">
+            <a href="index.html" class="logo">Via<span>duct</span></a>
+            <button class="mobile-nav-close" id="mobileNavClose" aria-label="Close menu">×</button>
+        </div>
+        <ul class="mobile-nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="construction.html" class="active">Construction</a></li>
+            <li><a href="architecture.html">Architecture</a></li>
+            <li><a href="labour.html">Labour</a></li>
+            <li><a href="automation.html">Automation</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Construction Services</h1>
+                <p>Building solid foundations for your future with expert construction solutions</p>
+                <div class="hero-cta">
+                    <a href="contact.html" class="btn btn-primary">Start Your Project →</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="assets/construction.jpg" alt="Modern Construction Building" class="hero-img">
+                <div class="hero-decoration"></div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Carousel + Text Section -->
+    <section class="carousel-section">
+        <div class="container">
+            <div class="carousel-container">
+                <!-- Carousel Side -->
+                <div class="carousel-side">
+                    <div class="carousel-slides">
+                        <!-- Slide 1 -->
+                        <div class="carousel-slide active" data-index="0">
+                            <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Planning & Design" loading="lazy">
+                            <div class="slide-overlay">
+                                <h4>Planning & Design</h4>
+                            </div>
+                        </div>
+                        
+                        <!-- Slide 2 -->
+                        <div class="carousel-slide" data-index="1">
+                            <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Foundation & Structure" loading="lazy">
+                            <div class="slide-overlay">
+                                <h4>Foundation & Structure</h4>
+                            </div>
+                        </div>
+                        
+                        <!-- Slide 3 -->
+                        <div class="carousel-slide" data-index="2">
+                            <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Construction & Development" loading="lazy">
+                            <div class="slide-overlay">
+                                <h4>Construction & Development</h4>
+                            </div>
+                        </div>
+                        
+                        <!-- Slide 4 -->
+                        <div class="carousel-slide" data-index="3">
+                            <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Finishing & Quality Check" loading="lazy">
+                            <div class="slide-overlay">
+                                <h4>Finishing & Quality Check</h4>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Navigation Arrows -->
+                    <div class="carousel-nav prev" onclick="prevSlide()">‹</div>
+                    <div class="carousel-nav next" onclick="nextSlide()">›</div>
+                    
+                    <!-- Dots Navigation -->
+                    <div class="carousel-controls">
+                        <div class="carousel-dot active" data-index="0" onclick="goToSlide(0)"></div>
+                        <div class="carousel-dot" data-index="1" onclick="goToSlide(1)"></div>
+                        <div class="carousel-dot" data-index="2" onclick="goToSlide(2)"></div>
+                        <div class="carousel-dot" data-index="3" onclick="goToSlide(3)"></div>
+                    </div>
+                </div>
+
+                <!-- Text Side -->
+                <div class="text-side">
+                    <h2 class="section-title">Our Construction Process</h2>
+                    
+                    <div class="text-content">
+                        <div class="text-item active" data-index="0" onclick="goToSlide(0)">
+                            <div class="item-number">01</div>
+                            <div class="item-content">
+                                <h4>Planning & Design</h4>
+                                <p>Comprehensive project planning with architectural designs, engineering calculations, and detailed blueprints for precise execution.</p>
+                            </div>
+                        </div>
+
+                        <div class="text-item" data-index="1" onclick="goToSlide(1)">
+                            <div class="item-number">02</div>
+                            <div class="item-content">
+                                <h4>Foundation & Structure</h4>
+                                <p>Solid foundation work with reinforced concrete structures ensuring durability and stability for years to come.</p>
+                            </div>
+                        </div>
+
+                        <div class="text-item" data-index="2" onclick="goToSlide(2)">
+                            <div class="item-number">03</div>
+                            <div class="item-content">
+                                <h4>Construction & Development</h4>
+                                <p>Quality construction using premium materials with skilled craftsmanship and modern building techniques.</p>
+                            </div>
+                        </div>
+
+                        <div class="text-item" data-index="3" onclick="goToSlide(3)">
+                            <div class="item-number">04</div>
+                            <div class="item-content">
+                                <h4>Finishing & Quality Check</h4>
+                                <p>Premium finishes with detailed quality inspections ensuring every project meets our high standards.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="content-section">
+        <div class="container">
+            <div class="section-intro">
+                <h2>Comprehensive Construction Solutions</h2>
+                <p>From residential homes to large commercial complexes, we bring your vision to life with precision engineering, quality materials, and expert craftsmanship. Our experienced team ensures every project is completed on time and to the highest standards.</p>
+            </div>
+
+            <div class="construction-grid">
+                <a href="#" class="card">
+                    <div class="go-corner">
+                        <div class="go-arrow">→</div>
+                    </div>
+                    <span class="card-icon">🏠</span>
+                    <h3 class="card-title">Residential Construction</h3>
+                    <p class="small-desc">Building dream homes and comfortable living spaces with attention to detail and quality craftsmanship.</p>
+                    <ul class="card-features">
+                        <li>Single-family homes</li>
+                        <li>Multi-unit buildings</li>
+                        <li>Luxury villas & estates</li>
+                        <li>Custom home building</li>
+                    </ul>
+                </a>
+
+                <a href="#" class="card">
+                    <div class="go-corner">
+                        <div class="go-arrow">→</div>
+                    </div>
+                    <span class="card-icon">🏢</span>
+                    <h3 class="card-title">Commercial Construction</h3>
+                    <p class="small-desc">Creating functional and impressive commercial spaces that support business growth and success.</p>
+                    <ul class="card-features">
+                        <li>Office buildings</li>
+                        <li>Retail spaces</li>
+                        <li>Hotels & hospitality</li>
+                        <li>Healthcare facilities</li>
+                    </ul>
+                </a>
+
+                <a href="#" class="card">
+                    <div class="go-corner">
+                        <div class="go-arrow">→</div>
+                    </div>
+                    <span class="card-icon">🏭</span>
+                    <h3 class="card-title">Industrial Construction</h3>
+                    <p class="small-desc">Building robust industrial facilities designed for efficiency, safety, and long-term performance.</p>
+                    <ul class="card-features">
+                        <li>Manufacturing plants</li>
+                        <li>Warehouses</li>
+                        <li>Factory buildings</li>
+                        <li>Distribution centers</li>
+                    </ul>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <h2>Ready to Start Your Construction Project?</h2>
+        <p>Let's build something amazing together</p>
+        <a href="contact.html" class="cta-button">Get a Free Quote</a>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>Via<span>duct</span></h3>
+                    <p>Your trusted partner in construction, design, and home automation.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link" aria-label="WhatsApp">📱</a>
+                        <a href="#" class="social-link" aria-label="Facebook">📘</a>
+                        <a href="#" class="social-link" aria-label="Instagram">📷</a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Services</h4>
+                    <ul class="footer-links">
+                        <li><a href="construction.html">Construction</a></li>
+                        <li><a href="architecture.html">Architecture</a></li>
+                        <li><a href="labour.html">Labour Services</a></li>
+                        <li><a href="automation.html">Home Automation</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Company</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html#about">About Us</a></li>
+                        <li><a href="#">Projects</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Contact</h4>
+                    <ul class="footer-links">
+                        <li><a href="tel:+918825658811">8825658811/9385619847</a></li>
+                        <li><a href="mailto:info@viaduct.com">info@viaduct.com</a></li>
+                        <li>86, pillaiyar Kovil Street, kalavali koot road, Ranipet</li>
+                        <li>Chennai-632506</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2026 Via<span>duct</span>. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Navigation Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileNav = document.getElementById('mobileNav');
+        const mobileNavClose = document.getElementById('mobileNavClose');
+        const overlay = document.getElementById('overlay');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileNav.classList.add('active');
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        mobileNavClose.addEventListener('click', () => {
+            mobileNav.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+
+        overlay.addEventListener('click', () => {
+            mobileNav.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+
+        // Close mobile menu when clicking on links
+        const mobileLinks = document.querySelectorAll('.mobile-nav-links a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileNav.classList.remove('active');
+                overlay.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+
+        // Carousel functionality
+        let currentSlide = 0;
+        const totalSlides = 4;
+        let autoSlideInterval;
+        
+        function goToSlide(index) {
+            currentSlide = index;
+            updateCarousel();
+        }
+        
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updateCarousel();
+        }
+        
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            updateCarousel();
+        }
+        
+        function updateCarousel() {
+            // Update slides
+            const slides = document.querySelectorAll('.carousel-slide');
+            slides.forEach(slide => {
+                slide.classList.remove('active');
+            });
+            slides[currentSlide].classList.add('active');
+            
+            // Update dots
+            const dots = document.querySelectorAll('.carousel-dot');
+            dots.forEach(dot => {
+                dot.classList.remove('active');
+            });
+            dots[currentSlide].classList.add('active');
+            
+            // Update text items
+            const textItems = document.querySelectorAll('.text-item');
+            textItems.forEach(item => {
+                item.classList.remove('active');
+            });
+            textItems[currentSlide].classList.add('active');
+            
+            // Reset auto slide timer
+            resetAutoSlide();
+        }
+        
+        function startAutoSlide() {
+            autoSlideInterval = setInterval(nextSlide, 5000);
+        }
+        
+        function resetAutoSlide() {
+            clearInterval(autoSlideInterval);
+            startAutoSlide();
+        }
+        
+        // Fix for mobile 100vh issue
+        function setVH() {
+            let vh = window.innerHeight * 0.01;
+            document.documentElement.style.setProperty('--vh', `${vh}px`);
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCarousel();
+            startAutoSlide();
+            setVH();
+            
+            // Add hover effects for text items
+            const textItems = document.querySelectorAll('.text-item');
+            textItems.forEach((item, index) => {
+                item.addEventListener('mouseenter', () => {
+                    goToSlide(index);
+                });
+            });
+            
+            // Pause auto-slide on hover
+            const carousel = document.querySelector('.carousel-side');
+            carousel.addEventListener('mouseenter', () => {
+                clearInterval(autoSlideInterval);
+            });
+            
+            carousel.addEventListener('mouseleave', () => {
+                startAutoSlide();
+            });
+        });
+
+        window.addEventListener('resize', setVH);
+        window.addEventListener('orientationchange', setVH);
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                if (this.getAttribute('href') === '#') return;
+                
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Prevent zoom on double-tap (iOS)
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', function(event) {
+            const now = (new Date()).getTime();
+            if (now - lastTouchEnd <= 300) {
+                event.preventDefault();
+            }
+            lastTouchEnd = now;
+        }, false);
+    </script>
+</body>
+</html>

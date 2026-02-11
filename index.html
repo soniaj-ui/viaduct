@@ -1,0 +1,1393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BuildTech - Construction & Home Automation Services</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2563EB;
+            --primary-dark: #1D4ED8;
+            --secondary: #0F172A;
+            --accent: #8B5CF6;
+            --light: #F8FAFC;
+            --white: #FFFFFF;
+            --gray-100: #F1F5F9;
+            --gray-200: #E2E8F0;
+            --gray-300: #CBD5E1;
+            --gray-400: #94A3B8;
+            --gray-500: #64748B;
+            --gray-600: #475569;
+            --gray-700: #334155;
+            --gray-800: #1E293B;
+            --border: rgba(0, 0, 0, 0.05);
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.08);
+            --shadow-xl: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+            --vh: 1vh; /* For mobile height fix */
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--gray-700);
+            background: var(--white);
+            line-height: 1.6;
+            font-weight: 400;
+            overflow-x: hidden;
+            -webkit-tap-highlight-color: transparent; /* Remove mobile tap highlight */
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            color: var(--secondary);
+            line-height: 1.2;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1.5rem; /* Adjusted for mobile */
+        }
+
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Poppins', sans-serif;
+            font-size: clamp(1.5rem, 4vw, 2rem); /* Responsive font size */
+            font-weight: 800;
+            color: var(--secondary);
+            position: relative;
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        .logo::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 40px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--gray-700);
+            cursor: pointer;
+            padding: 0.5rem;
+            z-index: 1002;
+            min-width: 44px; /* Minimum touch target */
+            min-height: 44px;
+        }
+
+        /* Navigation */
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-weight: 600;
+            color: var(--gray-600);
+            position: relative;
+            font-size: 0.95rem;
+            padding: 0.5rem 0;
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: var(--primary);
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding-top: 12rem;
+            padding-bottom: 8rem;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #F0F9FF 0%, #FEF7FF 100%);
+            min-height: calc(var(--vh, 1vh) * 100); /* Mobile height fix */
+        }
+
+        .hero-content {
+            max-width: 800px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.2rem, 5vw, 4rem); /* Responsive font size */
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 0.8s ease-out 0.2s backwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 2vw, 1.25rem); /* Responsive font size */
+            color: var(--gray-600);
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+            animation: fadeInUp 0.8s ease-out 0.4s backwards;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.8s ease-out 0.6s backwards;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            min-height: 48px; /* Minimum touch target */
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: var(--white);
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--secondary);
+            border: 2px solid var(--gray-300);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero-decoration {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40%;
+            height: 80%;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            border-radius: 40% 0 0 40%;
+            opacity: 0.1;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(-50%) translateX(0); }
+            50% { transform: translateY(-50%) translateX(-20px); }
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 6rem 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-tag {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background: var(--light);
+            color: var(--primary);
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+            border: 1px solid var(--border);
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3rem); /* Responsive font size */
+            margin-bottom: 1rem;
+            letter-spacing: -0.5px;
+        }
+
+        .section-subtitle {
+            color: var(--gray-600);
+            font-size: clamp(1rem, 2vw, 1.125rem); /* Responsive font size */
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Services - SINGLE ROW */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+        }
+
+        .service-card {
+            background: var(--white);
+            padding: 2.5rem 2rem;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--primary);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+            transform-origin: left;
+        }
+
+        .service-card:hover {
+            box-shadow: var(--shadow-xl);
+            border-color: var(--primary);
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .service-icon {
+            width: 70px;
+            height: 70px;
+            background: var(--light);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+            transition: all 0.3s ease;
+        }
+
+        .service-card:hover .service-icon {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .service-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+        }
+
+        .service-card p {
+            color: var(--gray-600);
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .service-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-top: auto;
+        }
+
+        .service-link::after {
+            content: '→';
+            transition: transform 0.3s ease;
+        }
+
+        .service-card:hover .service-link::after {
+            transform: translateX(5px);
+        }
+
+        /* About Us */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-image {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow-xl);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.8s ease;
+        }
+
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+
+        .about-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            opacity: 0.1;
+            pointer-events: none;
+        }
+
+        .about-text h2 {
+            font-size: clamp(1.8rem, 3vw, 2.5rem); /* Responsive font size */
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .about-text p {
+            font-size: 1.1rem;
+            color: var(--gray-600);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .value-item {
+            text-align: center;
+            padding: 2rem;
+            background: var(--light);
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            border: 1px solid var(--border);
+        }
+
+        .value-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary);
+        }
+
+        .value-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--white);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin: 0 auto 1rem;
+            color: var(--primary);
+            box-shadow: var(--shadow);
+        }
+
+        .value-item h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .value-item p {
+            font-size: 0.9rem;
+            color: var(--gray-500);
+            margin: 0;
+        }
+
+        /* Partners */
+        .partners-section {
+            background: var(--light);
+            padding: 6rem 0;
+        }
+
+        .partners-slider {
+            position: relative;
+            overflow: hidden;
+            padding: 3rem 0;
+        }
+
+        .slider-track {
+            display: flex;
+            gap: 4rem;
+            animation: slide 30s linear infinite;
+        }
+
+        @keyframes slide {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(calc(-200px * 8 - 4rem * 8));
+            }
+        }
+
+        .partner-item {
+            flex: 0 0 200px;
+            height: 120px;
+            background: var(--white);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .partner-item:hover {
+            transform: translateY(-8px) scale(1.05);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .partner-logo {
+            max-width: 100%;
+            max-height: 60px;
+            filter: grayscale(100%);
+            opacity: 0.7;
+            transition: all 0.3s ease;
+        }
+
+        .partner-item:hover .partner-logo {
+            filter: grayscale(0%);
+            opacity: 1;
+        }
+
+        /* Stats */
+        .stats-section {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            color: var(--white);
+            padding: 5rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stats-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><path fill="%23ffffff" opacity="0.05" d="M0,0L1000,0L1000,1000L0,1000Z"/></svg>');
+            background-size: cover;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: clamp(2.5rem, 5vw, 4rem); /* Responsive font size */
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            color: var(--white);
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            font-weight: 500;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--secondary);
+            color: var(--white);
+            padding: 6rem 0 3rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        .footer-brand h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--white);
+        }
+
+        .footer-brand p {
+            color: var(--gray-400);
+            margin-bottom: 1.5rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-link {
+            width: 45px;
+            height: 45px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            min-width: 44px; /* Minimum touch target */
+            min-height: 44px;
+        }
+
+        .social-link:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .footer-column h4 {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--white);
+        }
+
+        .footer-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .footer-links a {
+            color: var(--gray-400);
+            transition: all 0.2s ease;
+            display: inline-block;
+            min-height: 24px; /* Ensure touch target */
+        }
+
+        .footer-links a:hover {
+            color: var(--white);
+            padding-left: 5px;
+        }
+
+        .footer-bottom {
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            color: var(--gray-400);
+            font-size: 0.875rem;
+        }
+
+        /* Mobile Navigation */
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: 300px;
+            background: var(--white);
+            box-shadow: -5px 0 20px rgba(0, 0, 0, 0.1);
+            z-index: 1001;
+            padding: 2rem;
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .mobile-nav.active {
+            transform: translateX(0);
+        }
+
+        .mobile-nav-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .mobile-nav-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--gray-700);
+            cursor: pointer;
+            min-width: 44px;
+            min-height: 44px;
+        }
+
+        .mobile-nav-links {
+            list-style: none;
+        }
+
+        .mobile-nav-links li {
+            margin-bottom: 1rem;
+        }
+
+        .mobile-nav-links a {
+            display: block;
+            padding: 0.75rem 0;
+            font-weight: 600;
+            color: var(--gray-700);
+            border-bottom: 1px solid var(--border);
+            font-size: 1.1rem;
+            min-height: 44px; /* Minimum touch target */
+            display: flex;
+            align-items: center;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+        }
+
+        .overlay.active {
+            display: block;
+        }
+
+        /* Hero Image */
+        .hero-image {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 45%;
+            height: 80%;
+            border-radius: 30% 0 0 30%;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .hero-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .hero-image-decoration {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            opacity: 0.1;
+            mix-blend-mode: overlay;
+            border-radius: 30% 0 0 30%;
+        }
+
+        /* Touch device optimizations */
+        @media (hover: none) and (pointer: coarse) {
+            .service-card:hover,
+            .value-item:hover,
+            .partner-item:hover {
+                transform: none;
+                box-shadow: var(--shadow);
+            }
+            
+            .btn-primary:hover,
+            .btn-outline:hover {
+                transform: none;
+                box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+            }
+            
+            .social-link:hover {
+                transform: none;
+            }
+            
+            .service-card:hover .service-icon {
+                background: var(--light);
+                color: var(--primary);
+            }
+            
+            .service-card:hover::before {
+                transform: scaleX(0);
+            }
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 1200px) {
+            .services-grid {
+                gap: 1rem;
+            }
+            
+            .service-card {
+                padding: 2rem 1.5rem;
+            }
+            
+            .partner-item {
+                flex: 0 0 180px;
+                height: 100px;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+            
+            .section-title {
+                font-size: 2.5rem;
+            }
+            
+            .about-content {
+                gap: 3rem;
+            }
+            
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 3rem;
+            }
+            
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+            
+            .values-grid {
+                gap: 1rem;
+            }
+            
+            .value-item {
+                padding: 1.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1rem;
+            }
+            
+            .hero {
+                padding-top: 10rem;
+                padding-bottom: 6rem;
+                min-height: auto;
+                padding-bottom: 4rem;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-cta {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .hero-image {
+                position: relative;
+                width: 100%;
+                height: 300px;
+                border-radius: 20px;
+                margin-top: 3rem;
+                transform: none;
+                top: 0;
+                right: 0;
+            }
+            
+            .hero-img {
+                border-radius: 20px;
+            }
+            
+            .hero-image-decoration {
+                border-radius: 20px;
+            }
+            
+            .hero-decoration {
+                display: none;
+            }
+            
+            .section {
+                padding: 4rem 0;
+            }
+            
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .about-image {
+                order: -1;
+            }
+            
+            .about-image img {
+                height: 400px;
+            }
+            
+            .values-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-nav {
+                display: block;
+            }
+            
+            .services-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+            
+            .partners-slider {
+                padding: 2rem 0;
+            }
+            
+            .partner-item {
+                flex: 0 0 160px;
+                height: 90px;
+            }
+            
+            .slider-track {
+                gap: 2rem;
+                animation: slide 20s linear infinite;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                padding-top: 8rem;
+                padding-bottom: 4rem;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .section {
+                padding: 3rem 0;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .section-header {
+                margin-bottom: 2.5rem;
+            }
+            
+            .values-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .service-card {
+                padding: 1.5rem;
+            }
+            
+            .service-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+            }
+            
+            .service-card h3 {
+                font-size: 1.2rem;
+            }
+            
+            .partner-item {
+                flex: 0 0 140px;
+                height: 80px;
+                padding: 1rem;
+            }
+            
+            .footer {
+                padding: 4rem 0 2rem;
+            }
+            
+            .mobile-nav {
+                width: 280px;
+                padding: 1.5rem;
+            }
+            
+            .mobile-nav-links a {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .hero p {
+                font-size: 0.95rem;
+            }
+            
+            .btn {
+                padding: 0.875rem 1.5rem;
+                font-size: 0.95rem;
+            }
+            
+            .section-title {
+                font-size: 1.6rem;
+            }
+            
+            .service-card {
+                padding: 1.25rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container header-content">
+            <a href="index.html" class="logo">Via<span>duct</span></a>
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open menu">☰</button>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="construction.html">Construction</a></li>
+                <li><a href="architecture.html">Architecture</a></li>
+                <li><a href="labour.html">Labour</a></li>
+                <li><a href="automation.html">Automation</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Mobile Navigation -->
+    <div class="overlay" id="overlay"></div>
+    <div class="mobile-nav" id="mobileNav">
+        <div class="mobile-nav-header">
+            <a href="index.html" class="logo">Via<span>duct</span></a>
+            <button class="mobile-nav-close" id="mobileNavClose" aria-label="Close menu">×</button>
+        </div>
+        <ul class="mobile-nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="construction.html">Construction</a></li>
+            <li><a href="architecture.html">Architecture</a></li>
+            <li><a href="labour.html">Labour</a></li>
+            <li><a href="automation.html">Automation</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Building Tomorrow's Infrastructure Today</h1>
+                <p>Expert construction, innovative architecture, reliable labour services, and cutting-edge home automation solutions - all under one roof.</p>
+                <div class="hero-cta">
+                    <a href="contact.html" class="btn btn-primary">Start Your Project →</a>
+                    <a href="#services" class="btn btn-outline">Explore Services</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="assets/index.jpg" alt="Modern Construction Building" class="hero-img">
+                <div class="hero-image-decoration"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Us Section -->
+    <section id="about" class="section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">About Us</span>
+                <h2 class="section-title">Our Story & Values</h2>
+                <p class="section-subtitle">Building trust through excellence and innovation since 2010</p>
+            </div>
+
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>Building Dreams with Precision</h2>
+                    <p>Founded in 2010, BuildTech has grown from a small construction firm to a comprehensive building solutions provider. Our journey began with a simple vision: to create spaces that inspire while maintaining the highest standards of quality and safety.</p>
+                    <p>Today, we offer end-to-end solutions from architectural design and construction to labour services and smart home automation. Our team of 50+ experts brings together decades of experience across various disciplines.</p>
+                    
+                    <div class="values-grid">
+                        <div class="value-item">
+                            <div class="value-icon">🏆</div>
+                            <h4>Excellence</h4>
+                            <p>Committed to quality in every project</p>
+                        </div>
+                        <div class="value-item">
+                            <div class="value-icon">🤝</div>
+                            <h4>Integrity</h4>
+                            <p>Honest, transparent communication</p>
+                        </div>
+                        <div class="value-item">
+                            <div class="value-icon">💡</div>
+                            <h4>Innovation</h4>
+                            <p>Embracing modern techniques</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="BuildTech Team">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section - SINGLE ROW -->
+    <section id="services" class="section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Our Services</span>
+                <h2 class="section-title">What We Do Best</h2>
+                <p class="section-subtitle">Comprehensive solutions for all your construction, design, and automation needs</p>
+            </div>
+
+            <div class="services-grid">
+                <a href="construction.html" class="service-card">
+                    <div class="service-icon">🏗️</div>
+                    <h3>Construction</h3>
+                    <p>From residential homes to commercial complexes, we deliver quality construction with precision and care.</p>
+                    <span class="service-link">Learn More</span>
+                </a>
+
+                <a href="architecture.html" class="service-card">
+                    <div class="service-icon">📐</div>
+                    <h3>Architecture & Design</h3>
+                    <p>Innovative designs that blend aesthetics with functionality, creating spaces that inspire.</p>
+                    <span class="service-link">Learn More</span>
+                </a>
+
+                <a href="labour.html" class="service-card">
+                    <div class="service-icon">👷</div>
+                    <h3>Labour Services</h3>
+                    <p>Skilled professionals for household and industrial needs, ensuring efficient and reliable workforce solutions.</p>
+                    <span class="service-link">Learn More</span>
+                </a>
+
+                <a href="automation.html" class="service-card">
+                    <div class="service-icon">🏠</div>
+                    <h3>Home Automation</h3>
+                    <p>Transform your living space with smart technology - lighting, security, climate control, and more.</p>
+                    <span class="service-link">Learn More</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partners Section -->
+    <section class="partners-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Our Partners</span>
+                <h2 class="section-title">Trusted By Industry Leaders</h2>
+                <p class="section-subtitle">We collaborate with leading brands to deliver the best solutions</p>
+            </div>
+
+            <div class="partners-slider">
+                <div class="slider-track">
+                    <!-- Duplicate items for seamless loop -->
+                    <div class="partner-item">
+                        <img src="https://via.placeholder.com/150x60/2563EB/ffffff?text=Partner+1" alt="Partner 1" class="partner-logo">
+                    </div>
+                    <div class="partner-item">
+                        <img src="https://via.placeholder.com/150x60/1D4ED8/ffffff?text=Partner+2" alt="Partner 2" class="partner-logo">
+                    </div>
+                    <div class="partner-item">
+                        <img src="https://via.placeholder.com/150x60/8B5CF6/ffffff?text=Partner+3" alt="Partner 3" class="partner-logo">
+                    </div>
+                    <div class="partner-item">
+                        <img src="https://via.placeholder.com/150x60/0F172A/ffffff?text=Partner+4" alt="Partner 4" class="partner-logo">
+                    </div>
+                    <div class="partner-item">
+                        <img src="https://via.placeholder.com/150x60/2563EB/ffffff?text=Partner+5" alt="Partner 5" class="partner-logo">
+                    </div>
+                    <div class="partner-item">
+                        <img src="https://via.placeholder.com/150x60/1D4ED8/ffffff?text=Partner+6" alt="Partner 6" class="partner-logo">
+                    </div>
+                    <div class="partner-item">
+                        <img src="https://via.placeholder.com/150x60/8B5CF6/ffffff?text=Partner+7" alt="Partner 7" class="partner-logo">
+                    </div>
+                    <div class="partner-item">
+                        <img src="https://via.placeholder.com/150x60/0F172A/ffffff?text=Partner+8" alt="Partner 8" class="partner-logo">
+                    </div>
+                    <!-- Duplicates for seamless loop -->
+                    <div class="partner-item">
+                        <img src="https://via.placeholder.com/150x60/2563EB/ffffff?text=Partner+1" alt="Partner 1" class="partner-logo">
+                    </div>
+                    <div class="partner-item">
+                        <img src="https://via.placeholder.com/150x60/1D4ED8/ffffff?text=Partner+2" alt="Partner 2" class="partner-logo">
+                    </div>
+                    <div class="partner-item">
+                        <img src="https://via.placeholder.com/150x60/8B5CF6/ffffff?text=Partner+3" alt="Partner 3" class="partner-logo">
+                    </div>
+                    <div class="partner-item">
+                        <img src="https://via.placeholder.com/150x60/0F172A/ffffff?text=Partner+4" alt="Partner 4" class="partner-logo">
+                    </div>
+                    <div class="partner-item">
+                        <img src="https://via.placeholder.com/150x60/2563EB/ffffff?text=Partner+5" alt="Partner 5" class="partner-logo">
+                    </div>
+                    <div class="partner-item">
+                        <img src="https://via.placeholder.com/150x60/1D4ED8/ffffff?text=Partner+6" alt="Partner 6" class="partner-logo">
+                    </div>
+                    <div class="partner-item">
+                        <img src="https://via.placeholder.com/150x60/8B5CF6/ffffff?text=Partner+7" alt="Partner 7" class="partner-logo">
+                    </div>
+                    <div class="partner-item">
+                        <img src="https://via.placeholder.com/150x60/0F172A/ffffff?text=Partner+8" alt="Partner 8" class="partner-logo">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>BuildTech</h3>
+                    <p>Your trusted partner in construction, design, and home automation. Building dreams with precision and care.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link" aria-label="Facebook">📱</a>
+                        <a href="#" class="social-link" aria-label="Instagram">📘</a>
+                        <a href="#" class="social-link" aria-label="Twitter">📷</a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Services</h4>
+                    <ul class="footer-links">
+                        <li><a href="construction.html">Construction</a></li>
+                        <li><a href="architecture.html">Architecture</a></li>
+                        <li><a href="labour.html">Labour Services</a></li>
+                        <li><a href="automation.html">Home Automation</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Company</h4>
+                    <ul class="footer-links">
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#">Projects</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Contact</h4>
+                    <ul class="footer-links">
+                        <li><a href="tel:+15551234567">+1 (555) 123-4567</a></li>
+                        <li><a href="mailto:info@buildtech.com">info@buildtech.com</a></li>
+                        <li>123 Innovation Drive</li>
+                        <li>Tech City, TC 10101</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2026 BuildTech. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Navigation Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileNav = document.getElementById('mobileNav');
+        const mobileNavClose = document.getElementById('mobileNavClose');
+        const overlay = document.getElementById('overlay');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileNav.classList.add('active');
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        mobileNavClose.addEventListener('click', () => {
+            mobileNav.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+
+        overlay.addEventListener('click', () => {
+            mobileNav.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+
+        // Close mobile menu when clicking on links
+        const mobileLinks = document.querySelectorAll('.mobile-nav-links a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileNav.classList.remove('active');
+                overlay.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                if (this.getAttribute('href') === '#') return;
+                
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Fix for mobile 100vh issue
+        function setVH() {
+            let vh = window.innerHeight * 0.01;
+            document.documentElement.style.setProperty('--vh', `${vh}px`);
+        }
+
+        // Initialize
+        setVH();
+        window.addEventListener('resize', setVH);
+        window.addEventListener('orientationchange', setVH);
+
+        // Prevent zoom on double-tap (iOS)
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', function(event) {
+            const now = (new Date()).getTime();
+            if (now - lastTouchEnd <= 300) {
+                event.preventDefault();
+            }
+            lastTouchEnd = now;
+        }, false);
+
+        // Improve touch scrolling on iOS
+        document.addEventListener('touchmove', function(e) {
+            if (e.scale !== 1) {
+                e.preventDefault();
+            }
+        }, { passive: false });
+    </script>
+</body>
+</html>
