@@ -32,7 +32,7 @@
             --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
             --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.08);
             --shadow-xl: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
-            --vh: 1vh;
+            --vh: 1vh; /* For mobile height fix */
         }
 
         body {
@@ -42,9 +42,7 @@
             line-height: 1.6;
             font-weight: 400;
             overflow-x: hidden;
-            -webkit-tap-highlight-color: transparent;
-            position: relative;
-            width: 100%;
+            -webkit-tap-highlight-color: transparent; /* Remove mobile tap highlight */
         }
 
         h1, h2, h3, h4 {
@@ -63,9 +61,7 @@
         .container {
             max-width: 1280px;
             margin: 0 auto;
-            padding: 0 1.5rem;
-            position: relative;
-            z-index: 2;
+            padding: 0 1.5rem; /* Adjusted for mobile */
         }
 
         /* Header */
@@ -89,7 +85,7 @@
 
         .logo {
             font-family: 'Poppins', sans-serif;
-            font-size: clamp(1.5rem, 4vw, 2rem);
+            font-size: clamp(1.5rem, 4vw, 2rem); /* Responsive font size */
             font-weight: 800;
             color: var(--secondary);
             position: relative;
@@ -119,12 +115,12 @@
             cursor: pointer;
             padding: 0.5rem;
             z-index: 1002;
-            min-width: 44px;
+            min-width: 44px; /* Minimum touch target */
             min-height: 44px;
         }
 
         /* Navigation */
-        .nav-links {
+       .nav-links {
             display: flex;
             gap: 2.5rem;
             list-style: none;
@@ -164,28 +160,24 @@
             color: var(--primary);
         }
 
-        /* Hero Section - FIXED SCROLLING ISSUE */
+        /* Hero Section */
         .hero {
             padding-top: 12rem;
             padding-bottom: 8rem;
             position: relative;
             overflow: hidden;
             background: linear-gradient(135deg, #F0F9FF 0%, #FEF7FF 100%);
-            min-height: 100vh;
-            min-height: calc(var(--vh, 1vh) * 100);
-            width: 100%;
-            pointer-events: auto; /* Ensure pointer events work */
+            min-height: calc(var(--vh, 1vh) * 100); /* Mobile height fix */
         }
 
         .hero-content {
             max-width: 800px;
             position: relative;
-            z-index: 10; /* Higher z-index than decoration */
-            pointer-events: auto;
+            z-index: 2;
         }
 
         .hero h1 {
-            font-size: clamp(2.2rem, 5vw, 4rem);
+            font-size: clamp(2.2rem, 5vw, 4rem); /* Responsive font size */
             margin-bottom: 1.5rem;
             letter-spacing: -0.5px;
             background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
@@ -207,7 +199,7 @@
         }
 
         .hero p {
-            font-size: clamp(1rem, 2vw, 1.25rem);
+            font-size: clamp(1rem, 2vw, 1.25rem); /* Responsive font size */
             color: var(--gray-600);
             margin-bottom: 2.5rem;
             max-width: 600px;
@@ -233,10 +225,7 @@
             align-items: center;
             justify-content: center;
             gap: 0.5rem;
-            min-height: 48px;
-            pointer-events: auto;
-            position: relative;
-            z-index: 15;
+            min-height: 48px; /* Minimum touch target */
         }
 
         .btn-primary {
@@ -264,7 +253,6 @@
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
         }
 
-        /* FIXED: Hero Decoration - Set pointer-events to none */
         .hero-decoration {
             position: absolute;
             right: 0;
@@ -276,8 +264,6 @@
             border-radius: 40% 0 0 40%;
             opacity: 0.1;
             animation: float 6s ease-in-out infinite;
-            pointer-events: none; /* CRITICAL: Allows scrolling through */
-            z-index: 1;
         }
 
         @keyframes float {
@@ -285,47 +271,9 @@
             50% { transform: translateY(-50%) translateX(-20px); }
         }
 
-        /* FIXED: Hero Image - Set pointer-events to none */
-        .hero-image {
-            position: absolute;
-            right: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 45%;
-            height: 80%;
-            border-radius: 30% 0 0 30%;
-            overflow: hidden;
-            z-index: 5;
-            pointer-events: none; /* CRITICAL: Allows scrolling through */
-        }
-
-        .hero-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-            pointer-events: none;
-        }
-
-        .hero-image-decoration {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
-            opacity: 0.1;
-            mix-blend-mode: overlay;
-            border-radius: 30% 0 0 30%;
-            pointer-events: none;
-        }
-
         /* Section Styles */
         .section {
             padding: 6rem 0;
-            position: relative;
-            z-index: 20;
-            background: var(--white);
         }
 
         .section-header {
@@ -348,14 +296,14 @@
         }
 
         .section-title {
-            font-size: clamp(2rem, 4vw, 3rem);
+            font-size: clamp(2rem, 4vw, 3rem); /* Responsive font size */
             margin-bottom: 1rem;
             letter-spacing: -0.5px;
         }
 
         .section-subtitle {
             color: var(--gray-600);
-            font-size: clamp(1rem, 2vw, 1.125rem);
+            font-size: clamp(1rem, 2vw, 1.125rem); /* Responsive font size */
             max-width: 600px;
             margin: 0 auto;
         }
@@ -380,9 +328,6 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            text-decoration: none;
-            color: inherit;
-            pointer-events: auto;
         }
 
         .service-card::before {
@@ -497,7 +442,7 @@
         }
 
         .about-text h2 {
-            font-size: clamp(1.8rem, 3vw, 2.5rem);
+            font-size: clamp(1.8rem, 3vw, 2.5rem); /* Responsive font size */
             margin-bottom: 1.5rem;
             background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
             -webkit-background-clip: text;
@@ -563,8 +508,6 @@
         .partners-section {
             background: var(--light);
             padding: 6rem 0;
-            position: relative;
-            z-index: 20;
         }
 
         .partners-slider {
@@ -609,6 +552,7 @@
         .partner-logo {
             max-width: 100%;
             max-height: 60px;
+            
             transition: all 0.3s ease;
         }
 
@@ -650,7 +594,7 @@
         }
 
         .stat-number {
-            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-size: clamp(2.5rem, 5vw, 4rem); /* Responsive font size */
             font-weight: 800;
             margin-bottom: 0.5rem;
             color: var(--white);
@@ -664,13 +608,12 @@
         }
 
         /* Footer */
-        .footer {
+       .footer {
             background: var(--secondary);
             color: var(--white);
             padding: clamp(4rem, 8vw, 6rem) 0 3rem;
             position: relative;
             overflow: hidden;
-            z-index: 20;
         }
 
         .footer::before {
@@ -786,7 +729,6 @@
             color: var(--gray-400);
             font-size: 0.875rem;
         }
-
         /* Mobile Navigation */
         .mobile-nav {
             display: none;
@@ -839,7 +781,7 @@
             color: var(--gray-700);
             border-bottom: 1px solid var(--border);
             font-size: 1.1rem;
-            min-height: 44px;
+            min-height: 44px; /* Minimum touch target */
             display: flex;
             align-items: center;
         }
@@ -857,6 +799,38 @@
 
         .overlay.active {
             display: block;
+        }
+
+        /* Hero Image */
+        .hero-image {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 45%;
+            height: 80%;
+            border-radius: 30% 0 0 30%;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .hero-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .hero-image-decoration {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            opacity: 0.1;
+            mix-blend-mode: overlay;
+            border-radius: 30% 0 0 30%;
         }
 
         /* Touch device optimizations */
@@ -934,11 +908,6 @@
             .value-item {
                 padding: 1.5rem;
             }
-            
-            .hero-image {
-                width: 50%;
-                height: 70%;
-            }
         }
 
         @media (max-width: 768px) {
@@ -950,6 +919,7 @@
                 padding-top: 10rem;
                 padding-bottom: 6rem;
                 min-height: auto;
+                padding-bottom: 4rem;
             }
             
             .hero h1 {
@@ -965,7 +935,6 @@
                 justify-content: center;
             }
             
-            /* FIXED: Mobile hero image positioning */
             .hero-image {
                 position: relative;
                 width: 100%;
@@ -975,7 +944,6 @@
                 transform: none;
                 top: 0;
                 right: 0;
-                pointer-events: none;
             }
             
             .hero-img {
@@ -1110,10 +1078,6 @@
             .mobile-nav-links a {
                 font-size: 1rem;
             }
-            
-            .hero-image {
-                height: 250px;
-            }
         }
 
         @media (max-width: 360px) {
@@ -1137,10 +1101,6 @@
             .service-card {
                 padding: 1.25rem;
             }
-            
-            .hero-image {
-                height: 220px;
-            }
         }
     </style>
 </head>
@@ -1151,7 +1111,7 @@
             <a href="index.html" class="logo">Via<span>duct</span></a>
             <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open menu">☰</button>
             <ul class="nav-links">
-                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="index.html"  class="active">Home</a></li>
                 <li><a href="construction.html">Construction</a></li>
                 <li><a href="architecture.html">Architecture</a></li>
                 <li><a href="labour.html">Labour</a></li>
@@ -1178,7 +1138,7 @@
         </ul>
     </div>
 
-    <!-- Hero Section - FIXED SCROLLING ISSUE -->
+    <!-- Hero Section -->
     <section class="hero">
         <div class="container">
             <div class="hero-content">
@@ -1193,7 +1153,6 @@
                 <img src="assets/index.jpg" alt="Modern Construction Building" class="hero-img">
                 <div class="hero-image-decoration"></div>
             </div>
-            <div class="hero-decoration"></div>
         </div>
     </section>
 
@@ -1345,14 +1304,14 @@
     </section>
 
     <!-- Footer -->
-    <footer class="footer">
+       <footer class="footer">
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-brand">
                     <h3>Via<span>duct</span></h3>
                     <p>Your trusted partner in construction, design, and home automation. Building dreams with precision and care.</p>
                     <div class="social-links">
-                        <a href="#" class="social-link" aria-label="Whatsapp"><i class="ri-whatsapp-line"></i></a>
+                   <a href="#" class="social-link" aria-label="Whatsapp"><i class="ri-whatsapp-line"></i></a>
                         <a href="#" class="social-link" aria-label="Instagram"><i class="ri-instagram-line"></i></a>
                         <a href="#" class="social-link" aria-label="Facebook"><i class="ri-facebook-line"></i></a>
                     </div>
@@ -1381,10 +1340,10 @@
                 <div class="footer-column">
                     <h4>Contact</h4>
                     <ul class="footer-links">
-                        <li><a href="tel:+918825658811">Mobile: 8825658811</a></li>
-                        <li><a href="tel:+919385619847">Mobile: 9385619847</a></li>
+                        <li><a href="tel:+91 8825658811">Mobile:8825658811</a></li>
+                        <li><a href="tel:+91 9385619847">Mobile:9385619847</a></li>
                         <li><a href="mailto:info@viaduct.com">info@viaduct.com</a></li>
-                        <li>86, pillaiyar Kovil Street, kalavali koot road, Ranipet</li>
+                       <li>86, pillaiyar Kovil Street, kalavali koot road, Ranipet</li>
                         <li>Chennai-632506</li>
                     </ul>
                 </div>
@@ -1395,6 +1354,7 @@
             </div>
         </div>
     </footer>
+
 
     <script>
         // Mobile Navigation Toggle
@@ -1447,42 +1407,9 @@
             });
         });
 
-        // Fix for mobile 100vh issue
-        function setVH() {
-            let vh = window.innerHeight * 0.01;
-            document.documentElement.style.setProperty('--vh', `${vh}px`);
-        }
+       
 
-        // Initialize
-        setVH();
-        window.addEventListener('resize', setVH);
-        window.addEventListener('orientationchange', setVH);
-
-        // Prevent zoom on double-tap (iOS)
-        let lastTouchEnd = 0;
-        document.addEventListener('touchend', function(event) {
-            const now = (new Date()).getTime();
-            if (now - lastTouchEnd <= 300) {
-                event.preventDefault();
-            }
-            lastTouchEnd = now;
-        }, false);
-
-        // Improve touch scrolling on iOS
-        document.addEventListener('touchmove', function(e) {
-            if (e.scale !== 1) {
-                e.preventDefault();
-            }
-        }, { passive: false });
-
-        // Add active class to current page in navigation
-        const currentPage = window.location.pathname.split('/').pop();
-        const navLinks = document.querySelectorAll('.nav-links a, .mobile-nav-links a');
-        navLinks.forEach(link => {
-            if (link.getAttribute('href') === currentPage) {
-                link.classList.add('active');
-            }
-        });
+        
     </script>
 </body>
 </html>
